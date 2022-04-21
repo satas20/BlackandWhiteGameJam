@@ -4,14 +4,18 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public Transform spwanpoint;
     public Rigidbody2D rb;
+    private GameObject button;
     public float jumpForce = 3;
     public float playerSpeed = 3;
     [SerializeField]
     private bool grounded = true;
     private bool crouched = false;
     private bool jumped = false;
-    private int jumpCount = 1;
+    
+    public int jumpCount = 1;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -88,8 +92,24 @@ public class PlayerMovement : MonoBehaviour
         {
             grounded = true;
             crouched = false;
-            
+            jumpCount = 2;
 
+        }
+        if (collision.gameObject.CompareTag("Spike"))
+        {
+            transform.position = spwanpoint.position;
+            DoorScript.clicked = false;
+            if (button != null) 
+            {
+                button.gameObject.active = true;
+            }
+
+        }
+        if (collision.gameObject.CompareTag("button"))
+        {
+            button = collision.gameObject;
+            collision.gameObject.active = false;
+            DoorScript.clicked = true;
         }
     }
     private void OnCollisionStay2D(Collision2D collision)
