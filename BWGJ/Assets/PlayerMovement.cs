@@ -109,7 +109,7 @@ public class PlayerMovement : MonoBehaviour
         {
             button = collision.gameObject;
             collision.gameObject.active = false;
-            DoorScript.clicked = true;
+            DoorScriptreverse.clicked = true;
         }
     }
     private void OnCollisionStay2D(Collision2D collision)
