@@ -13,13 +13,13 @@ public class PlayerMovement : MonoBehaviour
     private bool grounded = true;
     private bool crouched = false;
     private bool jumped = false;
-    
+    AudioSource audio;
     public int jumpCount = 1;
 
     // Start is called before the first frame update
     void Start()
     {
-
+       audio= gameObject.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -57,12 +57,12 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             grounded = false;
-           
-
-
-
 
             jumpCount--;
+            audio.Play();
+
+
+            
 
         }
 
