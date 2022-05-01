@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
     public Transform spwanpoint;
     public Rigidbody2D rb;
     private GameObject button;
+    private GameObject reversedoor;
     public float jumpForce = 3;
     public float playerSpeed = 3;
     [SerializeField]
@@ -15,11 +17,14 @@ public class PlayerMovement : MonoBehaviour
     private bool jumped = false;
     AudioSource audio;
     public int jumpCount = 1;
-
+    public static int deathcount = 0;
+    public Text deathcounttext;
     // Start is called before the first frame update
     void Start()
     {
+
        audio= gameObject.GetComponent<AudioSource>();
+       reversedoor = GameObject.FindGameObjectWithTag("reversedoor");
     }
 
     // Update is called once per frame
@@ -102,6 +107,8 @@ public class PlayerMovement : MonoBehaviour
             if (button != null) 
             {
                 button.gameObject.active = true;
+                DoorScriptreverse.clicked = false;
+                deathcount++;
             }
 
         }
